@@ -53,7 +53,9 @@ app.use((request, response, next)=>{
 
 //EndPoints: Listar a sigla de todos os Estados 
 app.get('/estados/sigla', cors(), async function (requeste,response, next){
-    response.json('{teste: "API funcionando"}')
+    let controleListaEstados = require('./model/manipulando_array_json')
+    let estados = controleListaEstados.getListaDeEstados()
+    response.json(estados)
     response.status(200)
 })
 app.listen(8080, function(){

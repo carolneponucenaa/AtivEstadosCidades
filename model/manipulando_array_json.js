@@ -147,3 +147,11 @@ const getCidades = function(siglaEstado){
 
 // console.log(getCidades('RJ'))
 
+module.exports = {
+    getListaDeEstados,
+    getDadosEstado,
+    getCapitalEstado,
+    getEstadosRegiao,
+    getCapitalPais,
+    getCidades
+}
