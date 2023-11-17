@@ -52,12 +52,34 @@ app.use((request, response, next)=>{
 })
 
 //EndPoints: Listar a sigla de todos os Estados 
-app.get('/estados/sigla', cors(), async function (requeste,response, next){
-    let controleListaEstados = require('./model/manipulando_array_json')
-    let estados = controleListaEstados.getListaDeEstados()
-    response.json(estados)
-    response.status(200)
+app.get('/estado/sigla/:uf', cors(), async function (request,response, next){
+    let siglaEstado = request.params.uf
+    let controleDadosEstados = require('./model/manipulando_array_json.js')
+    let dadosEstados = controleDadosEstados.getDadosEstado(siglaEstado)
+
+    if(dadosEstados){
+        response.json(dadosEstados)
+        response.status(200)
+    }else{
+        response.status(404)
+        response.json({erro: "Não foi possível encontrar um item"})
+    }
 })
+//EdPoint: Retorna os dados da capital filtrado pela sigla
+app.get('/capital/estado', cors(), async function(request,response,next){
+    let siglaEstado = request.query.uf
+    let controleDadosCapital = require('./model/manipulando_array_json.js')
+    let dadosCapital = controleDadosCapital.getCapitalEstado(siglaEstado)
+
+    if(dadosCapital){
+        response.json(dadosCapital)
+        response.json({erro: "Não foi possível encontrar um item"})
+    }
+    console.log(siglaEstado)
+})
+
+
+//Executa a API e faz ela ficar aguardando aquisições
 app.listen(8080, function(){
     console.log('API funcionando e aguardando requisições')
 })

@@ -29,6 +29,7 @@ const getDadosEstado = (sigla) =>{
 
     let estadosCidades = estados_cidades.estadosCidades.estados
     let JSONsigla = {}
+    let status = false;
 
     estadosCidades.forEach( function(estados){
 
@@ -38,11 +39,15 @@ const getDadosEstado = (sigla) =>{
             JSONsigla.descricao = estados.nome
             JSONsigla.capital = estados.capital
             JSONsigla.regiao = estados.regiao
+            status = true
         }
        
     })
 
+    if (status)    
     return JSONsigla
+    else
+    return false
 }
 
 // console.log(getDadosEstado('RJ'))
@@ -51,16 +56,20 @@ const getCapitalEstado = (sigla) =>{
 
     let estadosCidades = estados_cidades.estadosCidades.estados
     let JSONsigla = {}
+    let status = false;
 
     estadosCidades.forEach( function(estados){
 
         if(estados.sigla.includes(sigla)){
             JSONsigla.capital = estados.capital
+            status = true
         }
 
     })
-
+    if (status)
     return JSONsigla
+    else
+    return false
 }
 
 // console.log(getCapitalEstado('SP'))
